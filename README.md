@@ -1,6 +1,8 @@
 # VeriChain AI: Verifiable AI Agents for RWA Tokenization on Aptos
 
-![VeriChain AI](./verichain.png)
+<div align="center">
+  <img src="./verichain.png" alt="VeriChain AI Logo" width="400">
+</div>
 
 ```
 ╔════════════════════════════════════════════════════════════════╗
@@ -14,6 +16,10 @@
 ║                                                                ║
 ╚════════════════════════════════════════════════════════════════╝
 ```
+
+## 🖥️ Live Demo Interface
+
+![VeriChain Homepage](./homepage.png)
 
 **Status:** ✅ MVP Ready (Unit tests passing, E2E validated, testnet deployed)
 
