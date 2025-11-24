@@ -1,0 +1,16 @@
+[package]
+name = "verichain"
+version = "0.1.0"
+language = "1.5"
+
+[addresses]
+verichain = "0x0"
+
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "aptos-core-v2.3"
+subdir = "aptos-move/framework/aptos-framework"
+
+[dev-dependencies]
