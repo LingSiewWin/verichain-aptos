@@ -4,9 +4,7 @@ import { spawnSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 import pc from 'picocolors';
-
-const args = process.argv.slice(2);
-const network = args[0]?.toLowerCase() === 'testnet' ? 'testnet' : 'localnet';
+import yaml from 'yaml';
 
 const envPath = path.join(import.meta.dir, '..', '.env');
 let envContent = '';
@@ -26,8 +24,26 @@ if (!privateKeyMatch) {
 }
 
 const privateKey = privateKeyMatch[1].trim();
+
+// Read Aptos config to get sender address and network
+const configPath = path.join(import.meta.dir, '..', '.aptos', 'config.yaml');
+if (!fs.existsSync(configPath)) {
+  console.error(pc.red('❌ .aptos/config.yaml not found. Run: aptos init'));
+  process.exit(1);
+}
+
+const configContent = fs.readFileSync(configPath, 'utf-8');
+const config = yaml.parse(configContent);
+const senderAddr = config.profiles?.default?.account;
+const network = config.profiles?.default?.network?.toLowerCase() || 'testnet';
+
+if (!senderAddr) {
+  console.error(pc.red('❌ Account address not found in .aptos/config.yaml'));
+  process.exit(1);
+}
+
 console.log(pc.cyan(`⚡ [DEPLOY] Network: ${network}`));
-console.log(pc.cyan(`⚡ [DEPLOY] Private Key: ${privateKey.slice(0, 10)}...`));
+console.log(pc.cyan(`⚡ [DEPLOY] Sender: ${senderAddr.slice(0, 8)}...`));
 
 // Check if aptos CLI is available
 const aptosCheck = spawnSync('which', ['aptos'], { encoding: 'utf-8' });
@@ -42,20 +58,28 @@ if (aptosCheck.status !== 0) {
 
 console.log(pc.cyan('[DEPLOY] Publishing Move module to ' + network + '...'));
 
-// Run: aptos move publish --named-addresses verichain=default --network testnet
-const publishCmd = spawnSync('aptos', ['move', 'publish', '--named-addresses', 'verichain=default', '--network', network], {
+// Run: yes | aptos move publish --named-addresses verichain=<sender_address> --max-gas 10000
+const publishCmd = spawnSync('bash', ['-c', `yes | aptos move publish --named-addresses "verichain=${senderAddr}" --max-gas 10000`], {
   cwd: path.join(import.meta.dir, '..'),
   encoding: 'utf-8',
+  stdio: ['pipe', 'pipe', 'pipe'],
 });
 
 if (publishCmd.status !== 0) {
-  console.error(pc.red(`❌ Publish failed:\n${publishCmd.stderr}`));
+  console.error(pc.red(`❌ Publish failed:`));
+  console.error(pc.red(publishCmd.stderr || publishCmd.stdout));
   process.exit(1);
 }
 
-// Extract contract address from output (aptos move publish returns module address)
-const addressMatch = publishCmd.stdout.match(/0x[a-f0-9]{1,64}/);
-const contractAddr = addressMatch ? addressMatch[0] : '0x' + '0'.repeat(64);
+// Extract module address from output (search for "Transaction submitted:" line which contains the TX hash)
+// Then extract any 0x address after "Modules published under" or from "0x" pattern
+const allMatches = publishCmd.stdout.match(/0x[a-f0-9]{1,64}/g) || [];
+const contractAddr = allMatches.length > 0 ? allMatches[allMatches.length - 1] : null;
+
+if (!contractAddr) {
+  console.error(pc.red(`❌ Could not extract module address from output`));
+  process.exit(1);
+}
 
 console.log(pc.green(`✅ [DEPLOY] Contract deployed to: ${contractAddr}`));
 
