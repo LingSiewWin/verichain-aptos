@@ -1,0 +1,12 @@
+{
+  "name": "@verichain/contracts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VeriChain Move smart contracts",
+  "scripts": {
+    "build": "aptos move compile --package-dir .",
+    "test": "aptos move test --package-dir sources",
+    "deploy": "aptos move publish --package-dir . --named-addresses verichain=$(grep CONTRACT_ADDR ../../.env | cut -d= -f2)",
+    "clean": "rm -rf build/"
+  }
+}

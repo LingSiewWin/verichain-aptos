@@ -1,0 +1,41 @@
+Compiling, may take a little while to download git dependencies...
+UPDATING GIT DEPENDENCY https://github.com/aptos-labs/aptos-core.git
+INCLUDING DEPENDENCY AptosFramework
+INCLUDING DEPENDENCY AptosStdlib
+INCLUDING DEPENDENCY MoveStdlib
+BUILDING verichain
+[0m[1m[38;5;11mwarning[0m[1m: unused alias[0m
+  [0m[34m┌─[0m /Users/lingsiewwin/Documents/Github/verichain-aptos/sources/verichain.move:2:24
+  [0m[34m│[0m
+[0m[34m2[0m [0m[34m│[0m   use aptos_framework::[0m[33maccount[0m;
+  [0m[34m│[0m                        [0m[33m^^^^^^^[0m [0m[33mUnused 'use' of alias 'account'. Consider removing it[0m
+
+[0m[1m[38;5;11mwarning[0m[1m: invalid documentation comment[0m
+   [0m[34m┌─[0m /Users/lingsiewwin/Documents/Github/verichain-aptos/sources/verichain.move:28:3
+   [0m[34m│[0m
+[0m[34m28[0m [0m[34m│[0m   [0m[33m/// VerifyEvent: Emitted when proof is verified[0m
+   [0m[34m│[0m   [0m[33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m [0m[33mDocumentation comment cannot be matched to a language item[0m
+
+[0m[1m[38;5;11mwarning[0m[1m: invalid documentation comment[0m
+   [0m[34m┌─[0m /Users/lingsiewwin/Documents/Github/verichain-aptos/sources/verichain.move:37:3
+   [0m[34m│[0m
+[0m[34m37[0m [0m[34m│[0m   [0m[33m/// TokenizeEvent: Emitted when RWA is minted[0m
+   [0m[34m│[0m   [0m[33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m [0m[33mDocumentation comment cannot be matched to a language item[0m
+
+[0m[1m[38;5;11mwarning[0m[1m: invalid documentation comment[0m
+   [0m[34m┌─[0m /Users/lingsiewwin/Documents/Github/verichain-aptos/sources/verichain.move:45:3
+   [0m[34m│[0m
+[0m[34m45[0m [0m[34m│[0m   [0m[33m/// TradeEvent: Emitted when RWA is transferred[0m
+   [0m[34m│[0m   [0m[33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m [0m[33mDocumentation comment cannot be matched to a language item[0m
+
+[0m[1m[38;5;11mwarning[0m[1m: invalid documentation comment[0m
+    [0m[34m┌─[0m /Users/lingsiewwin/Documents/Github/verichain-aptos/sources/verichain.move:131:3
+    [0m[34m│[0m
+[0m[34m131[0m [0m[34m│[0m   [0m[33m/// View: Check if AIResource is locked[0m
+    [0m[34m│[0m   [0m[33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m [0m[33mDocumentation comment cannot be matched to a language item[0m
+
+package size 2792 bytes
+Do you want to submit transaction for a maximum of 5000000 Octas at a gas unit price of 100 Octas? [yes/no] >
+{
+  "Error": "API error: API error Error(VmError): Invalid transaction: Type: Validation Code: INSUFFICIENT_BALANCE_FOR_TRANSACTION_FEE"
+}

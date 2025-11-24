@@ -1,0 +1,26 @@
+{
+  "name": "@verichain/backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "VeriChain backend services and facilitator",
+  "scripts": {
+    "dev": "bun run facilitator",
+    "build": "bun build ./src/facilitator.ts --outdir ./dist --target node",
+    "test": "vitest",
+    "deploy": "bun src/deploy.ts",
+    "facilitator": "bun src/facilitator.ts",
+    "demo": "bun src/facilitator.ts --input 42,69 --agent $(grep CONTRACT_ADDR ../../.env | cut -d= -f2) --mode success"
+  },
+  "dependencies": {
+    "@aptos-labs/ts-sdk": "^1.18.0",
+    "picocolors": "^1.0.1",
+    "yaml": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.0"
+  }
+}

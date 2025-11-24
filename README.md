@@ -1,5 +1,7 @@
 # VeriChain AI: Verifiable AI Agents for RWA Tokenization on Aptos
 
+![VeriChain AI](./verichain.png)
+
 ```
 ╔════════════════════════════════════════════════════════════════╗
 ║                                                                ║
@@ -110,10 +112,22 @@ verichain-aptos/
 ├── sources/
 │   └── verichain.move        # Core contract (140 LOC, 1/1 tests passing)
 ├── scripts/
-│   ├── deploy.ts             # Publish to testnet (auto-extracts module addr)
+│   ├── deploy.ts             # Publish to testnet
 │   └── facilitator.ts        # E2E: X402 → AI → verify → mint
+├── web/                      # Next.js 14 frontend
+│   ├── app/
+│   │   ├── page.tsx          # Main dashboard
+│   │   ├── layout.tsx        # Root layout
+│   │   ├── globals.css       # Tailwind + custom styles
+│   │   └── components/
+│   │       ├── ParticleScene.tsx  # 3D particle background
+│   │       ├── HUD.tsx           # Progress indicator
+│   │       ├── Terminal.tsx      # Log display
+│   │       └── ControlPanel.tsx  # Input controls
+│   ├── package.json          # Frontend deps
+│   └── tailwind.config.ts    # UI config
 └── .github/workflows/
-    └── ci.yml                # Lint, test, deploy sim (on push/PR)
+    └── ci.yml                # Lint, test, deploy sim
 ```
 
 ## 💻 Commands
@@ -216,12 +230,27 @@ See [docs/demo.md](docs/demo.md) for full script:
 | Testing    | Vitest + Move Prover | Fast, comprehensive, coverage reports        |
 | CI/CD      | GitHub Actions       | Lint, test, deploy sim on every push         |
 
-## 🚀 Next Steps
+## 🚀 Running VeriChain
 
-1. **Deploy fresh:** `bun run deploy` (or use pre-deployed address above)
-2. **Run E2E:** `bun run facilitator --input 42,69 --agent $CONTRACT_ADDR --mode success`
-3. **View results:** Check Aptos Explorer link in terminal output
-4. **Test security:** `bun run facilitator --input 42,69 --agent $CONTRACT_ADDR --mode fail`
+### Terminal (Fastest)
+```bash
+# Deploy contract to testnet
+bun run deploy
+
+# Run E2E success case
+bun run facilitator --input 42,69 --agent $(grep CONTRACT_ADDR .env | cut -d= -f2) --mode success
+
+# Test security (fail case)
+bun run facilitator --input 42,69 --agent $(grep CONTRACT_ADDR .env | cut -d= -f2) --mode fail
+```
+
+### Web Dashboard (Recommended for Demo)
+```bash
+cd web
+bun install
+bun run dev
+```
+Open `http://localhost:3000` in browser. Uses dummy data; connect to backend in development.
 
 ## 📍 Useful Links
 

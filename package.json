@@ -1,27 +1,37 @@
 {
-  "name": "verichain-ai",
-  "version": "0.1.0",
-  "description": "On-chain verifiable AI for dynamic RWA tokenization on Aptos",
+  "name": "verichain-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VeriChain AI: Verifiable AI Agents for RWA Tokenization on Aptos",
   "type": "module",
+  "workspaces": [
+    "packages/contracts",
+    "packages/backend",
+    "web"
+  ],
   "scripts": {
-    "deploy": "bun scripts/deploy.ts",
-    "facilitator": "bun scripts/facilitator.ts",
-    "test": "vitest --coverage",
-    "lint": "eslint . && prettier --check .",
-    "lint:fix": "eslint . --fix && prettier --write .",
-    "demo": "bun scripts/facilitator.ts --input 42,69 --agent 0x1 --mode success && open 'https://explorer.aptoslabs.com/txn/'"
-  },
-  "dependencies": {
-    "@aptos-labs/ts-sdk": "^1.18.0",
-    "@xenova/transformers": "^2.6.0",
-    "picocolors": "^1.0.1",
-    "yaml": "^2.3.0"
+    "dev": "bun run dev:backend & bun run dev:frontend",
+    "dev:backend": "cd packages/backend && bun run dev",
+    "dev:frontend": "cd web && bun run dev",
+    "build": "bun run build:contracts && bun run build:backend && bun run build:frontend",
+    "build:contracts": "cd packages/contracts && bun run build",
+    "build:backend": "cd packages/backend && bun run build",
+    "build:frontend": "cd web && bun run build",
+    "test": "bun run test:contracts && bun run test:backend",
+    "test:contracts": "cd packages/contracts && bun run test",
+    "test:backend": "cd packages/backend && bun run test",
+    "deploy": "cd packages/backend && bun run deploy",
+    "demo": "cd packages/backend && bun run demo",
+    "facilitator": "cd packages/backend && bun run facilitator",
+    "clean": "rm -rf node_modules packages/*/node_modules web/node_modules",
+    "install:all": "bun install && cd web && bun install",
+    "start": "echo 'Starting VeriChain...' && bun run dev"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "eslint": "^9.0.0",
     "prettier": "^3.0.0",
-    "vitest": "^1.0.0"
+    "typescript": "^5.3.3"
   },
   "engines": {
     "bun": ">=1.1.0",
