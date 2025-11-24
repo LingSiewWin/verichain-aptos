@@ -172,40 +172,6 @@ verichain-aptos/
 | Off-chain state leak   | All state on Aptos           | ✅ No DB          |
 | Private key exposure   | .env in .gitignore           | ✅ CI checks      |
 
-## 📊 Demo (4 minutes)
-
-See [docs/demo.md](docs/demo.md) for full script:
-
-1. Deploy contract (30s)
-2. Success: X402 pay → verify → mint (1m)
-3. Fail: Tampered proof abort (45s)
-4. Trade/metrics (1m)
-5. Close (15s)
-
-**Expected Output:**
-
-```
-╔════════════════════════════════════╗
-║   VERICHAIN AI: MOVING THE FUTURE   ║
-╚════════════════════════════════════╝
-
-⚡ [INIT] Mode: SUCCESS | Input: [42, 69]
-
-[1/4] Fetching CO2 data...
-⚡ [X402] HTTP 402 received → Settling...
-✅ [ORACLE] Received: 0.001 APT
-
-[2/4] Running AI inference...
-✅ [AI] Inferred: 111 micro-APT
-
-[3/4] Computing proof...
-✅ [PROOF] Computed: 42,69,...
-
-[4/4] Submitting on-chain...
-✅ [CHAIN] RWA minted: 0xdef...
-💰 [IMPACT] 42 tons CO2 offset
-📊 [EXPLORER] https://explorer.aptoslabs.com/...
-```
 
 ## 🎯 Key Features
 
