@@ -1,1 +1,34 @@
-claude.md
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+bun.lockb
+
+# Logs
+*.log
+logs/
+
+# Build output
+dist/
+build/
+coverage/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# CLAUDE.md (per CLAUDE.md instruction: Never git push CLAUDE.md)
+CLAUDE.md
+/docs
+demo.md
+architecture.md
