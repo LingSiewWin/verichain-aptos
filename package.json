@@ -14,7 +14,8 @@
   "dependencies": {
     "@aptos-labs/ts-sdk": "^1.18.0",
     "@xenova/transformers": "^2.6.0",
-    "picocolors": "^1.0.1"
+    "picocolors": "^1.0.1",
+    "yaml": "^2.3.0"
   },
   "devDependencies": {
     "@types/bun": "latest",
