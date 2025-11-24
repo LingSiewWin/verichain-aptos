@@ -1,0 +1,29 @@
+{
+  "name": "verichain-ai",
+  "version": "0.1.0",
+  "description": "On-chain verifiable AI for dynamic RWA tokenization on Aptos",
+  "type": "module",
+  "scripts": {
+    "deploy": "bun scripts/deploy.ts",
+    "facilitator": "bun scripts/facilitator.ts",
+    "test": "vitest --coverage",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint . --fix && prettier --write .",
+    "demo": "bun scripts/facilitator.ts --input 42,69 --agent 0x1 --mode success && open 'https://explorer.aptoslabs.com/txn/'"
+  },
+  "dependencies": {
+    "@aptos-labs/ts-sdk": "^1.18.0",
+    "@xenova/transformers": "^2.6.0",
+    "picocolors": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "bun": ">=1.1.0",
+    "node": ">=20.0.0"
+  }
+}

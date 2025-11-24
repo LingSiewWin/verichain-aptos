@@ -1,0 +1,9 @@
+[install]
+cache = false
+
+[run]
+disableInlineScripts = false
+
+[build]
+minify = true
+target = "node"
